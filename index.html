@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VCA — Viral Content & Growth</title>
+  <meta name="description" content="NextWave Agency helps brands grow with viral video editing, social strategy, paid ads, and bold design." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#11151a; --text:#e9eef5; --muted:#9fb0c3;
+      --brand:#6cf; --brand-2:#7CFFCB; --accent:#9A6BFF; --border:#1d232c;
+      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px; --radius-sm:12px; --maxw:1200px;
+    }
+    [data-theme="light"]{
+      --bg:#ffffff; --card:#f7f9fc; --text:#0d1117; --muted:#435366; --border:#e6ebf2; --shadow:0 10px 30px rgba(2,6,23,.08);
+    }
+    *{ box-sizing:border-box }
+    html,body{ margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; scroll-behavior:smooth; overflow-x: hidden; width: 100%; }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px }
+    .btn{ display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.2rem; border-radius:12px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.08)); color:var(--text); font-weight:600; cursor:pointer; transition:transform .12s ease, box-shadow .2s ease, background .2s ease }
+    .btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow) }
+    .btn.brand{ background:linear-gradient(135deg, var(--brand), var(--accent)); color:#000; border-color:transparent }
+    .btn.ghost{ background:transparent }
+    .badge{ font-size:.75rem; padding:.35rem .6rem; border-radius:999px; border:1px solid var(--border); color:var(--muted) }
+    header{ position:sticky; top:0; z-index:1000; backdrop-filter:saturate(140%) blur(10px); background:rgba(11,13,16,.6); border-bottom:1px solid var(--border) }
+    [data-theme="light"] header{ background:rgba(255,255,255,.7) }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+    .brand{ display:flex; align-items:center; gap:.8rem }
+    .logo{ width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--accent)); box-shadow:0 6px 18px rgba(124,255,203,.25) }
+    .navlinks{ display:flex; gap:1rem; align-items:center; flex-wrap:wrap }
+    .navlinks a{ color:var(--muted); font-weight:600 }
+    .toggle{ border:1px solid var(--border); background:transparent; padding:.55rem .8rem; border-radius:10px; cursor:pointer }
+    .hero{ padding:72px 0 30px; background: url(tt.jpeg); }
+    .hero-wrap{ display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center }
+    .h1{ font-size: clamp(32px, 4.4vw, 64px); line-height:1.05; letter-spacing:-.02em; margin:8px 0 16px; font-weight:800 }
+    .sub{ color:var(--muted); font-size: clamp(16px, 1.5vw, 18px) }
+    .cta-row{ display:flex; gap:.8rem; flex-wrap:wrap; margin-top:18px }
+    .hero-card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px }
+    .hero-card img{ width:100%; border-radius:12px }
+    .section{ padding:56px 0 }
+    .section-head{ display:flex; align-items:center; justify-content:center; gap:20px; margin-bottom:22px }
+    .section-head h2{ margin:0; font-size: clamp(24px, 3vw, 40px) }
+    .section-head p{ margin:0; color:var(--muted) }
+    .grid{ display:grid; gap:18px;  }
+    .services{ grid-template-columns: repeat(3,minmax(0,1fr)) }
+    @media (max-width:1000px){ .hero-wrap{ grid-template-columns:1fr } .services{ grid-template-columns: repeat(2,1fr) } }
+    @media (max-width:640px){ .services{ grid-template-columns:1fr } }
+    .card{ border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.05)); border-radius:14px; padding:16px; transition:transform .15s ease, border-color .2s ease, background .2s ease; position:relative; overflow:hidden }
+    .card:hover{ transform: translateY(-4px); border-color: rgba(124,255,203,.5) }
+    .icon{ width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, var(--brand-2), var(--brand)); display:grid; place-items:center; font-weight:800; color:#000; margin-bottom:12px }
+    .card h3{ margin:4px 0 6px; font-size:1.1rem }
+    .card p{ margin:0; color:var(--muted); font-size:.95rem }
+    .more{ display:inline-flex; align-items:center; gap:.5rem; margin-top:10px; font-weight:600; color:var(--brand) }
+    .filters{ display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:14px }
+    .filter{ padding:.5rem .8rem; border:1px solid var(--border); border-radius:999px; background:transparent; color:var(--muted); cursor:pointer; font-weight:600 }
+    .filter.active{ background:linear-gradient(135deg, var(--brand), var(--accent)); color:#000; border-color:transparent }
+    .portfolio{ grid-template-columns: repeat(3,minmax(0,1fr)) }
+    @media (max-width:900px){ .portfolio{ grid-template-columns: repeat(2,1fr) } }
+    @media (max-width:560px){ .portfolio{ grid-template-columns: 1fr } }
+    .work{ position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--border); background:var(--card) }
+    .work img{ width:100%; aspect-ratio: 16/11; object-fit:cover; display:block; transition:transform .3s ease }
+    .work:hover img{ transform: scale(1.06) }
+    .work .meta{ position:absolute; left:10px; bottom:10px; right:10px; display:flex; justify-content:space-between; align-items:center; gap:12px; background:rgba(0,0,0,.45); padding:10px 12px; border-radius:12px; color:#fff; backdrop-filter: blur(6px) }
+    .chip{ font-size:.75rem; padding:.25rem .55rem; border-radius:999px; background:rgba(255,255,255,.15) }
+    .logo-wall{ display:grid; grid-template-columns: repeat(6,1fr); gap:14px }
+    @media (max-width:900px){ .logo-wall{ grid-template-columns: repeat(3,1fr) } }
+    @media (max-width:560px){ .logo-wall{ grid-template-columns: repeat(2,1fr) } }
+    .logo-card{ border:1px solid var(--border); border-radius:14px; background:var(--card); display:grid; place-items:center; height:90px; padding:14px; filter: saturate(0) opacity(.85); transition: filter .2s ease, transform .15s ease }
+    .logo-card:hover{ filter:saturate(1) opacity(1); transform: translateY(-3px) }
+    .carousel{ position:relative }
+    .slides{ display:flex; overflow:hidden; border:1px solid var(--border); border-radius:16px; background:var(--card) }
+    .slide{ min-width:100%; padding:22px }
+    .t-quote{ font-size:1.05rem; line-height:1.5 }
+    .t-name{ margin-top:10px; color:var(--muted); font-weight:600 }
+    .c-ctrl{ margin-top:10px; display:flex; gap:8px; justify-content:flex-end }
+    .dot{ width:10px; height:10px; border:1px solid var(--border); border-radius:999px; background:transparent; cursor:pointer }
+    .dot.active{ background:var(--brand) }
+    .cta{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px; border:1px solid var(--border); border-radius:16px; background:linear-gradient(135deg, rgba(124,255,203,.16), rgba(153,107,255,.12)) }
+    .cta p{ margin:0; color:var(--muted) }
+    footer{ border-top:1px solid var(--border); padding:28px 0 50px; color:var(--muted) }
+    .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.55); z-index:2000; padding:20px }
+    .modal.open{ display:flex }
+    .modal-card{ width:min(900px, 100%); background:var(--bg); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); overflow:hidden }
+    .modal-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border) }
+    .modal-body{ padding:0; overflow:hidden }
+    .modal-body iframe{ display:block; width:100%; height:70vh; border:0 }
+    .reveal{ opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease }
+    .reveal.in{ opacity:1; transform:none }
+    .sr{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden }
+
+
+
+    .reveal {
+      text-align: center;
+      justify-content: space-between;
+  
+    }
+    /* price */
+    .pricing {
+    padding: 80px 20px;
+    background: #f9f9f9;
+    text-align: center;
+    }
+    .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    }
+    .section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    color: #666;
+    }
+    .pricing-cards {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+    .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    flex: 1;
+    max-width: 320px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    position: relative;
+    }
+    .card:hover {
+    transform: translateY(-8px);
+    }
+    .card h3 {
+    font-size: 1.4rem;
+    color: black;
+    margin-bottom: 15px;
+    }
+    .price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    }
+    .price span {
+    font-size: 0.9rem;
+    color: #888;
+    }
+    .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    }
+    .card ul li {
+    margin-bottom: 10px;
+    color: #444;
+    }
+    .btn {
+    display: inline-block;
+    background: #0073ff;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+    }
+    .btn:hover {
+    background: #0059cc;
+    }
+
+    /* Highlight Most Popular */
+    .popular {
+    border: 2px solid #0073ff;
+    transform: scale(1.05);
+    color: #000;
+    }
+    .badge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: #ff4081;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+    }
+
+
+
+    /* MOBILE FIXES */
+
+    /* Navigation - stack on small screens */
+    @media (max-width: 768px) {
+      .nav {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .navlinks {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 10px;
+      }
+      .navlinks .btn.brand {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Hero section - stack image under text */
+    @media (max-width: 768px) {
+      .hero-wrap {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .cta {
+        flex-direction: column;
+        text-align: center;
+      }
+      .cta button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Pricing cards - one per row on small screens */
+    @media (max-width: 768px) {
+      .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .pricing-cards .card {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+    /* About section - stack image below text */
+    @media (max-width: 768px) {
+      #about .grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      #about button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #grid-services {
+        flex-direction: column;
+        align-items: center;
+      }
+      #grid-services #card-reveal {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+
+
+
+    /* Hamburger menu styles */
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: blue;
+      padding-right: 20px;
+    }
+
+    /* Mobile nav hidden by default */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .navlinks {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        padding: 15px 0;
+        text-align: center;
+      }
+      .navlinks a {
+        padding: 10px;
+        display: block;
+      }
+      .navlinks.active {
+        display: flex;
+      }
+    }
+
+
+  /* past clients */
+  .clients-section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .clients-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    @media (max-width:768px) {
+      .clients-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (min-width:601px) {
+      .clients-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (min-width:1025px) {
+      .clients-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .client-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      color: #000;
+    }
+
+    .client-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Profile top section */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .profile-header img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .profile-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #000;
+    }
+
+    .verified {
+      color: #1DA1F2;
+      font-size: 1rem;
+      margin-left: 5px;
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      gap: 20px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .stats span {
+      display: block;
+      font-size: 0.9rem;
+      color: black;
+      font-weight: normal;
+    }
+
+    /* Bio */
+    .bio {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      line-height: 1.4;
+      color: #000;
+    }
+
+    /* Links */
+    .links a {
+      display: inline-block;
+      text-decoration: none;
+      color: #1a73e8;
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .clients-section h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    .email {
+      background-color: #0073ff;
+      color: #000;
+      font-weight: bolder;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .email:hover {
+      background-color: blue;
+    }
+
+    .nav-links.active,
+    .navlinks.active {
+      display: flex;
+    }
+
+
+    .vent {
+      text-decoration: none;
+      font-weight: bolder;
+      color: #0059cc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .vent:hover {
+      color: gold;
+      text-decoration: underline;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Main">
+      <a class="brand" href="#top" aria-label="NextWave home">
+        <div class="logo" aria-hidden="true"></div>
+        <strong>VCA</strong>
+      </a>
+
+      <button class="hamburger" id="hamburger">
+        ☰
+      </button>
+
+      <nav class="navlinks">
+        <a href="#services">Services</a>
+        <a href="portfolio.html">Past Work</a>
+        <a href="clients.html">Clients</a>
+        <a href="about.html">About</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="toggle" aria-label="Toggle theme">☀︎/☾</button>
+        <button class="email">
+          <span><a href="mailto:visioncontentagency@gmail.com">Email Us</a></span> →
+        </button>
+        <button class="btn brand speak-btn">
+          <span> <a href="https://calendly.com/visioncontentagency/30-min-meeting">Speak with an Expert </a></span> →
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <span class="badge">US-Standard Creative Agency</span>
+        <h1 class="h1">We grow brands with <span style="background:linear-gradient(135deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">viral content</span> & sharp strategy.</h1>
+        <p class="sub">Viral Video Editing • Social Media Strategy • Account Management • Paid Social Ads • Graphic Design • Consulting.</p>
+        <div class="cta-row">
+          <a href="https://calendly.com/visioncontentagency/30-min-meeting">
+            <button class="btn brand speak-btn">Speak with an Expert</button></a>
+          <a class="btn ghost" href="#work">See Past Work</a>
+        </div>
+        <div class="cta" style="margin-top:18px">
+          <div>
+            <strong>Free 20-min audit</strong>
+            <p>We’ll review your content & ads, then give 3 quick wins you can implement this week.</p>
+          </div>
+          <a href="https://calendly.com/visioncontentagency/30-min-meeting"></a><button class="btn brand speak-btn">Book Audit</button></a>
+        </div>
+      </div>
+      <!-- <aside class="hero-card reveal">
+        <img src="gd/1.jpg" alt="Editors at work in a creative studio" />
+        <div style="display:flex; gap:10px; margin-top:12px; align-items:center">
+          <div class="badge">Avg. 142% growth in 90 days*</div>
+          <div class="badge">Trusted by 70+ brands</div>
+        </div>
+        <p class="sub" style="margin-top:10px;">*Based on a subset of client outcomes. Results vary.</p>
+      </aside> -->
+    </div>
+  </main>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Services</h2>
+      </div>
+      <p>Strategy first. Creative that converts. Execution that scales.</p>
+
+
+      <div class="grid services" id="grid-services">
+        <!-- Viral Video Editing -->
+        <article class="card reveal" id="card-reveal">
+          <div class="icon">✂️</div>
+          <h3>Viral Video Editing</h3>
+          <p>Transform your raw clips into scroll-stopping viral content. From trending transitions to platform-optimized edits,
+             I’ll craft videos designed to capture attention, boost engagement, and maximize reach.</p>
+          <a class="more" href="#work">See samples →</a>
+        </article>
+
+        <!-- Social Media Strategy & Growth -->
+        <article class="card reveal" id="card-reveal">
+          <div class="icon">📈</div>
+          <h3>Social Media Strategy & Growth</h3>
+          <p>Get a tailor-made strategy that drives real results. I’ll help you grow your audience, increase engagement, and
+             turn followers into loyal fans with proven methods for TikTok, Instagram, YouTube, and more.</p>
+          <a class="more speak-btn" href="https://calendly.com/visioncontentagency/30-min-meeting">Plan my growth →</a>
+        </article>
+
+        <!-- Account Management & Branding -->
+        <article class="card reveal" id="card-reveal">
+          <div class="icon">🧭</div>
+          <h3>Account Management & Branding</h3>
+          <p>Save time while your brand thrives. I’ll manage your accounts, create consistent branding, and keep your social
+             presence polished and professional so you can focus on running your business.</p>
+          <a class="more" href="#about">About our process →</a>
+        </article>
+
+        <!-- Paid Social Ads & Targeted Campaigns -->
+        <article class="card reveal" id="card-reveal">
+          <div class="icon">🎯</div>
+          <h3>Paid Social Ads & Targeted Campaigns</h3>
+          <p>Maximize ROI with data-driven ad campaigns. From Facebook to TikTok, I’ll create and manage targeted ads that
+             reach the right people, increase conversions, and grow your business fast.</p>
+          <a class="more speak-btn" href="https://calendly.com/visioncontentagency/30-min-meeting">Run my ads →</a>
+        </article>
+
+        <!-- Graphic Design -->
+        <article class="card reveal" id="card-reveal">
+          <div class="icon">🎨</div>
+          <h3>Graphic Design</h3>
+          <p>Stand out with visuals that speak volumes. I design bold, modern, and brand-aligned graphics for social media,
+             ads, and marketing materials that grab attention and build recognition.</p>
+          <a class="more" href="#design">Design portfolio →</a>
+        </article>
+
+        <!-- Consulting & Training -->
+        <article class="card reveal" id="card-reveal">
+          <div class="icon">🧠</div>
+          <h3>Consulting & Training</h3>
+          <p>Want to handle it yourself but don’t know where to start? I’ll guide you with expert consulting and hands-on
+             training so you can confidently grow and manage your brand like a pro.</p>
+          <a class="more speak-btn" href="https://calendly.com/visioncontentagency/30-min-meeting">Book a session →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="work">
+    <div class="container">
+      <div class="section-head">
+        <h2>Past Work</h2>
+
+      </div>
+              <p>Click to view details. Filter by type.</p>
+
+
+      <div class="filters" role="tablist" aria-label="Portfolio filters">
+        <button class="filter active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button  class="filter" data-filter="video" role="tab">Video</button>
+        <button id="design" class="filter" data-filter="design" role="tab">Design</button>
+        <!-- <button class="filter" data-filter="ads" role="tab">Ads</button> -->
+
+      </div>
+
+      <div class="grid portfolio" id="portfolioGrid">
+        <!-- Repeatable Work Card -->
+        
+        <figure class="work reveal" data-tags="video">
+          <video controls preload="metadata" playsinline style="width: 100%; height: auto;">
+            <source src="/vid/11.mp4" type="video/mp4">
+          </video>
+          <figcaption class="meta">
+            <strong>long Form</strong>
+            <span class="chip">Video</span>
+          </figcaption>
+        </figure>
+
+        <!-- <figure class="work reveal" data-tags="ads">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="UGC ad set preview" />
+          <figcaption class="meta">
+            <strong>UGC Ad Set — SaaS</strong>
+            <span class="chip">Ads</span>
+          </figcaption>
+        </figure> -->
+
+        <figure class="work reveal" data-tags="design">
+          <img src="gd/1.jpg" alt="Carousel design" />
+          <figcaption class="meta">
+            <!-- <strong>Carousel Pack — Wellness</strong> -->
+            <span class="chip">Design</span>
+          </figcaption>
+        </figure>
+        <figure class="work reveal" data-tags="design">
+          <img src="gd/2.jpg" alt="Carousel design" />
+          <figcaption class="meta">
+            <!-- <strong>Carousel Pack — Wellness</strong> -->
+            <span class="chip">Design</span>
+          </figcaption>
+        </figure>
+
+        <figure class="work reveal" data-tags="design">
+          <img src="img/2.jpg" alt="Carousel design" />
+          <figcaption class="meta">
+            <!-- <strong>Carousel Pack — Wellness</strong> -->
+            <span class="chip">Design</span>
+          </figcaption>
+        </figure>
+        
+      
+    
+      <figure class="work reveal" data-tags="video">
+        <video controls preload="metadata" playsinline style="width: 100%; height: auto;">
+          <source src="vid/SHX.mp4" type="video/mp4">
+        </video>
+        <figcaption class="meta">
+          <!-- <strong>Short Form</strong>
+          <span class="chip">Video</span> -->
+        </figcaption>
+    </figure>
+    <!-- <figure class="work reveal" data-tags="video">
+      <video controls preload="metadata" playsinline style="width: 100%; height: auto;">
+        <source src="vid/Vid2.mp4" type="video/mp4">
+      </video>
+      <figcaption class="meta">
+        <strong>Short Form</strong>
+        <span class="chip">Video</span>
+      </figcaption>
+    </figure> -->
+
+
+      </div>
+      <a class="vent" href="portfolio.html">Click To View All Past Works</a>
+
+    </div>
+  </section>
+
+  <!-- Clients -->
+  <!-- <section id="clients">
+    <div class="container">
+      <div class="section-head">
+        <h2>Past Clients</h2>
+        <p>Brands that trusted our work.</p>
+      </div>
+      <div class="logo-wall">
+        <div class="logo-card"><img alt="Client 1" src="https://dummyimage.com/180x48/000/fff&text=CLIENT+01" /></div>
+        <div class="logo-card"><img alt="Client 2" src="https://dummyimage.com/180x48/000/fff&text=CLIENT+02" /></div>
+        <div class="logo-card"><img alt="Client 3" src="https://dummyimage.com/180x48/000/fff&text=CLIENT+03" /></div>
+        <div class="logo-card"><img alt="Client 4" src="https://dummyimage.com/180x48/000/fff&text=CLIENT+04" /></div>
+        <div class="logo-card"><img alt="Client 5" src="https://dummyimage.com/180x48/000/fff&text=CLIENT+05" /></div>
+        <div class="logo-card"><img alt="Client 6" src="https://dummyimage.com/180x48/000/fff&text=CLIENT+06" /></div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; margin-top:12px">
+        <a class="more" href="clients.html">View client stories →</a>
+      </div>
+    </div>
+  </section> -->
+  <section class="clients-section">
+    <div class="section-head">
+    <h2>Past Clients</h2>
+    </div>
+    <div class="clients-grid">
+
+      <!-- Natasha Graziano -->
+      <a href="https://www.instagram.com/natashagraziano?igsh=MjhhenZ2bjZpcG5x"><div class="client-card">
+        <div class="profile-header">
+          <img src="nat.jpg" alt="Natasha Graziano">
+          <div>
+            <h3>Natasha Graziano <span class="verified">✔</span></h3>
+            <p>@natashagraziano</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div>1,802 <span>Posts</span></div>
+          <div>13.9M <span>Followers</span></div>
+          <div>3,949 <span>Following</span></div>
+        </div>
+        <div class="bio">
+          #1 FEMALE MOTIVATIONAL SPEAKER – FORBES<br>
+          📜 Scripting & Abundance Coach<br>
+          🎤 TED Speaker 📺 TV Host<br>
+          📚 Best Seller
+        </div>
+        <!-- <div class="links">
+          <a href="#">natashagraziano.org</a><br>
+          <a href="#">@natashagraziano</a>
+        </div> -->
+      </div></a>
+
+      <!-- The Corner Convo Podcast -->
+      <a href="https://www.instagram.com/thecornerconvo?igsh=bTBrMHlxdmk5am4w"><div class="client-card">
+        <div class="profile-header">
+          <img src="corn.jpg" alt="The Corner Convo Podcast">
+          <div>
+            <h3>The Corner Convo Podcast <span class="verified">✔</span></h3>
+            <p>@thecornerconvo</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div>675 <span>Posts</span></div>
+          <div>18.4K <span>Followers</span></div>
+          <div>539 <span>Following</span></div>
+        </div>
+        <div class="bio">
+          Weekly podcast on the rights & wrongs in society, music, and basketball with a dose of comedy.<br>
+          Real convos, real laughs from the voices of Chicago.
+        </div>
+        <!-- <div class="links">
+          <a href="#">youtube.com/@thecornerconvo</a><br>
+          <a href="#">@thecornerconvo</a>
+        </div> -->
+      </div></a>
+
+      <!-- Example for Instablog9ja / X -->
+      <a href="https://www.instagram.com/dshands?igsh=MWViYWRwcWF0czZ4dw=="><div class="client-card">
+        <div class="profile-header">
+          <img src="mm.jpg" alt="Instablog9ja">
+          <div>
+            <h3>David Shands <span class="verified">✔</span></h3>
+            <p>@dshands</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div>7,989 <span>Posts</span></div>
+          <div>333k <span>Followers</span></div>
+          <div>6,051 <span>Following</span></div>
+        </div>
+        <div class="bio">
+          #1 Biz Coach for future Success.<br>
+          Helping hustlers turn Dreams into Reality.<br>
+          Host of @hotseastp & @socialproofpodcast
+        </div>
+        <div class="links">
+        </div>
+      </div></a>
+
+    </div>
+  </section>
+
+
+
+
+
+
+  <!-- Testimonials -->
+  <!-- <section aria-labelledby="testiTitle">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="testiTitle">What Clients Say</h2>
+        <p>Real results. Real voices.</p>
+      </div>
+      <div class="carousel reveal" aria-roledescription="carousel">
+        <div class="slides" id="slides">
+          <div class="slide">
+            <p class="t-quote">“NextWave rebuilt our content system. CPMs dropped 28% and we doubled weekly inbound.”</p>
+            <div class="t-name">— Ada, Growth Lead @ SaaS</div>
+          </div>
+          <div class="slide">
+            <p class="t-quote">“The ad creatives looked native to TikTok. CTR up 61% in the first month.”</p>
+            <div class="t-name">— Malik, Founder @ DTC</div>
+          </div>
+          <div class="slide">
+            <p class="t-quote">“Their training leveled up our in-house team. We now ship 20+ edits/week.”</p>
+            <div class="t-name">— Renee, Head of Content @ Media</div>
+          </div>
+        </div>
+        <div class="c-ctrl">
+          <button class="dot" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+          <button class="dot" aria-label="Slide 3"></button>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- pricing -->
+
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2 class="section-title">Our Plans</h2>
+      <p class="section-subtitle">Choose the package that fits your goals</p>
+  
+      <div class="pricing-cards">
+  
+        <!-- Essentials -->
+        <div class="card">
+          <h3>Essentials</h3>
+          <p class="price">$1,250 <span>/month</span></p>
+          <ul>
+            <li>10 Short-Form Videos</li>
+            <li>5 Custom Graphics</li>
+            <li>Monthly Report</li>
+            <li>Social Media Launch</li>
+          </ul>
+          <a href="https://calendly.com/visioncontentagency/30-min-meeting" class="btn">Schedule a Call</a>
+        </div>
+  
+        <!-- Most Popular -->
+        <div class="card popular">
+          <span class="badge">Most Popular</span>
+          <h3>Growth Package</h3>
+          <p class="price">$2,000 <span>/month</span></p>
+          <ul>
+            <li>15 Short-Form Videos</li>
+            <li>8 Custom Graphics</li>
+            <li>2 Strategy Calls</li>
+            <li>Monthly Report</li>
+            <li>Social Media Launch</li>
+            <li>2 Platforms Managed</li>
+          </ul>
+          <a href="https://calendly.com/visioncontentagency/30-min-meeting" class="btn">Schedule a Call</a>
+        </div>
+  
+        <!-- Full Takeover -->
+        <div class="card">
+          <h3>Full Takeover</h3>
+          <p class="price">$3,750 <span>/month</span></p>
+          <ul>
+            <li>20 Short-Form Videos</li>
+            <li>12 Custom Graphics</li>
+            <li>Growth Strategy Calls</li>
+            <li>Monthly Report</li>
+            <li>Social Media Launch</li>
+            <li>3 Platforms Managed</li>
+          </ul>
+          <a href="https://calendly.com/visioncontentagency/30-min-meeting" class="btn">Schedule a Call</a>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Contact / CTA -->
+  <section id="contact">
+    <div class="container">
+      <div class="cta reveal" role="region" aria-label="Contact quick CTA">
+        <div>
+          <strong>Ready to grow?</strong>
+          <p>Book a discovery call. We’ll audit your content and map next steps.</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap">
+          <a class="btn ghost" href="mailto:visioncontentagency@gmail.com">Email us</a>
+          <button class="email">
+            <span>Email Us</span> →
+          </button>
+          <button class="btn brand speak-btn"><a href="https://calendly.com/visioncontentagency/30-min-meeting">Speak with an Expert</a></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap">
+      <div>&copy; <span id="year"></span> VCA</div>
+      <div>Privacy • Terms</div>
+    </div>
+  </footer>
+
+  <!-- Scheduler Modal -->
+  <div class="modal" id="scheduler" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="schedTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <strong id="schedTitle">Schedule a Zoom Call</strong>
+        <button class="toggle" id="closeScheduler" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- TODO: Replace Calendly link with yours -->
+        <iframe title="Schedule" src="https://calendly.com/visioncontentagency/30-min-meeting"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.navlinks');
+
+    // Toggle nav on click
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+      // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle (persists)
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('nw-theme');
+    if(saved) document.body.setAttribute('data-theme', saved);
+    themeToggle.addEventListener('click', () => {
+      const next = document.body.getAttribute('data-theme') === 'light' ? '' : 'light';
+      if(next) document.body.setAttribute('data-theme', next); else document.body.removeAttribute('data-theme');
+      localStorage.setItem('nw-theme', next);
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Portfolio filters
+    const buttons = Array.from(document.querySelectorAll('.filter'));
+    const items = Array.from(document.querySelectorAll('.work'));
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active')); btn.classList.add('active');
+      const f = btn.dataset.filter;
+      items.forEach(card => {
+        const tags = (card.dataset.tags || '').split(' ');
+        const show = f === 'all' || tags.includes(f);
+        card.style.display = show ? '' : 'none';
+      });
+    }));
+
+    // Testimonials carousel
+    const slides = document.getElementById('slides');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    let idx = 0;
+    const go = (i) => {
+      idx = (i + dots.length) % dots.length;
+      slides.style.transform = `translateX(-${idx*100}%)`;
+      dots.forEach((d,k)=> d.classList.toggle('active', k===idx));
+    };
+    dots.forEach((d,i)=> d.addEventListener('click', ()=> go(i)));
+    go(0);
+    setInterval(()=> go(idx+1), 6000);
+
+    // Scheduler modal
+    const scheduler = document.getElementById('scheduler');
+    const openBtns = document.querySelectorAll('.speak-btn');
+    const closeBtn = document.getElementById('closeScheduler');
+    const openSched = () => { scheduler.classList.add('open'); scheduler.setAttribute('aria-hidden','false'); }
+    const closeSched = () => { scheduler.classList.remove('open'); scheduler.setAttribute('aria-hidden','true'); }
+    openBtns.forEach(b=> b.addEventListener('click', openSched));
+    closeBtn.addEventListener('click', closeSched);
+    scheduler.addEventListener('click', (e)=> { if(e.target === scheduler) closeSched(); });
+    window.addEventListener('keydown', (e)=> { if(e.key==='Escape') closeSched(); });
+  </script>
+</body>
+</html>
