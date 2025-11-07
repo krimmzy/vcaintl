@@ -257,7 +257,7 @@
 
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/Built like this Podcast.mp4" controls></video>
+        <video id="podcastVideo" src="vid/Built like this Podcast.mp4 like this Podcast.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -268,7 +268,7 @@
       
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/Unity in Diversity.mp4" controls></video>
+        <video id="podcastVideo" src="vid/Unity in Diversity.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -276,7 +276,7 @@
       </figure>
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/vid2.mp4" controls></video>
+        <video id="podcastVideo" src="vid/vid2.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -284,7 +284,7 @@
       </figure>
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/Video 1.mp4" controls></video>
+        <video id="podcastVideo" src="vid/Video 1.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -324,7 +324,7 @@
       </figure>
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/david.mp4" controls></video>
+        <video id="podcastVideo" src="vid/david.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -332,7 +332,7 @@
       </figure>
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/nash1.mp4" controls></video>
+        <video id="podcastVideo" src="vid/nash1.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -340,7 +340,7 @@
       </figure>
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/nash2.mp4" controls></video>
+        <video id="podcastVideo" src="vid/nash2" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -348,7 +348,7 @@
       </figure>
 
       <figure class="work reveal in" data-tags="video">
-        <video src="vid/SHX.mp4" controls></video>
+        <video id="podcastVideo" src="vid/SHX.mp4" controls preload="auto" playsinline style="width: 100%; height: auto;"></video>
         <figcaption class="meta">
           <strong></strong>
           <span class="chip">Video</span>
@@ -439,6 +439,14 @@
   <a class="vent" href="index.html">Back To Home</a>
 
   <script>
+    const video = document.getElementById('podcastVideo');
+
+    video.addEventListener('loadeddata', () => {
+      // Jump slightly into the video to skip any black frame
+      video.currentTime = 0.1;
+      // Pause so it shows the first visible frame
+      video.pause();
+    });
     const filters = document.querySelectorAll(".filter");
     const works = document.querySelectorAll(".work");
   
