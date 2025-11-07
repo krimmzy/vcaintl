@@ -206,6 +206,16 @@
       text-decoration: underline;
     }
 
+    video {
+      opacity: 0;
+      transition: opacity 0.4s ease-in;
+    }
+
+    video.ready {
+      opacity: 1;
+    }
+
+
   </style>
 </head>
 <body>
@@ -439,13 +449,23 @@
   <a class="vent" href="index.html">Back To Home</a>
 
   <script>
-    const video = document.getElementById('podcastVideo');
+    document.addEventListener("DOMContentLoaded", () => {
+      const video = document.getElementById("podcastVideo");
 
-    video.addEventListener('loadeddata', () => {
-      // Jump slightly into the video to skip any black frame
-      video.currentTime = 0.1;
-      // Pause so it shows the first visible frame
-      video.pause();
+      if (!video) return; // safety check
+
+      video.preload = "auto";
+      video.muted = true;
+      video.load();
+
+      video.addEventListener("loadedmetadata", () => {
+        video.currentTime = 0.05; // jump past black intro
+      });
+
+      video.addEventListener("seeked", () => {
+        video.pause();
+        video.classList.add("ready"); // fade in smoothly
+      });
     });
     const filters = document.querySelectorAll(".filter");
     const works = document.querySelectorAll(".work");
